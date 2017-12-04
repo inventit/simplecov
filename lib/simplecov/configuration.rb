@@ -8,7 +8,7 @@ require "simplecov/formatter/multi_formatter"
 #
 module SimpleCov
   module Configuration # rubocop:disable ModuleLength
-    attr_writer :filters, :groups, :formatter
+    attr_writer :filters, :groups, :formatter, :ignore_pattern
 
     #
     # The root for the project. This defaults to the
@@ -94,6 +94,16 @@ module SimpleCov
       @formatter = formatter
       raise "No formatter configured. Please specify a formatter using SimpleCov.formatter = SimpleCov::Formatter::SimpleFormatter" unless @formatter
       @formatter
+    end
+
+    #
+    # Gets or sets the ignore pattern.
+    #
+    def ignore_pattern(ignore_pattern = nil)
+      if !ignore_pattern.nil?
+        @ignore_pattern = ignore_pattern
+      end
+      @ignore_pattern
     end
 
     #

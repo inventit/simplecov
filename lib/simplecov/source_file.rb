@@ -30,7 +30,11 @@ module SimpleCov
         raise ArgumentError, "Only Integer and nil accepted for coverage" unless coverage.is_a?(Integer) || coverage.nil?
         @src         = src
         @line_number = line_number
-        @coverage    = coverage
+        if src.lstrip !~ SimpleCov.ignore_pattern
+          @coverage    = coverage
+        else
+          @coverage    = nil
+        end
         @skipped     = false
       end
 
